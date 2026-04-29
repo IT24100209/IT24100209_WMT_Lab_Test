@@ -2,12 +2,15 @@ import { useState } from "react";
 
 function ItemForm({ initialValues, onSubmit, submitText }) {
   const [formData, setFormData] = useState(
-    initialValues || {
+    initialValues
+      ? { ...initialValues, modelNumber: initialValues.modelNumber || "" }
+      : {
       name: "",
       category: "",
       price: "",
       description: "",
       imageUrl: "",
+      modelNumber: "",
     }
   );
 
@@ -33,6 +36,14 @@ function ItemForm({ initialValues, onSubmit, submitText }) {
 
       <label>Category</label>
       <input name="category" value={formData.category} onChange={handleChange} required />
+
+      <label>Model Number</label>
+      <input
+        name="modelNumber"
+        value={formData.modelNumber}
+        onChange={handleChange}
+        required
+      />
 
       <label>Price</label>
       <input
